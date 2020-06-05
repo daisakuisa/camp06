@@ -9,7 +9,7 @@ $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
 
 //２．データ登録SQL作成
 //作ったテーブル名を書く場所  xxxにテーブル名を入れます pdoデータスに接続します
-$stmt = $pdo->prepare("SELECT * FROM gs_bm_table");
+$stmt = $pdo->prepare("SELECT * FROM gs_bm_table ORDER BY id DESC");
 $status = $stmt->execute();
 
 //３．データ表示
@@ -28,6 +28,13 @@ if($status==false){
 $view .="<p>";
 $view .='<a href="u_view.php?id='.$result["id"].'">';
 $view .= $result["indate"].":".$result["bookname"];
+
+$view .='<br>';
+$view .='本のURL'.":".$result["bookURL"];
+$view .='</br>';
+$view .='<br>';
+$view .='本の内容'.":".$result["booktext"];
+$view .='</br>';
 $view .='</a>';
 $view .='  ';
 $view .='<a href="delete.php?id='.$result["id"].'">';
